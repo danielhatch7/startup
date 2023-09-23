@@ -10,6 +10,25 @@ Imagine this, you are with your friends trying to decide which activity you shou
 
 Below are a few of the main features you will find within the You Choose app.
 
+- Secure log in using HTTPS
+- Ability to join or start a live voting session
+- Ability to add a question to a personal question bank
+- Ability to add a question to a question group
+- Ability to view results for a live voting session
+- Users can choose top choice
+
+## Technologies
+
+I will utilize the following technologies.
+
+- **Authentication:** The You Choose app will require that the user log in with their username and password. This way they can access their own personal question bank.
+- **Database:** The questions users add to their question bank as well as the results from voting sessions will be stored in the database. Results will be deleted from the database after 24 hours.
+- **WebSocket Data:** The websocket data that will be used in this app is the realtime votes each user is submitting.
+
+## Rough Sketch
+
+![Screenshot 2023-09-23 164216](https://github.com/danielhatch7/startup/assets/97316307/4bb8958d-a5b5-4195-9de2-759d139e70e4)
+
 ### Login Page
 
 The login page is where the user will log into their account. If the user does not have an account already created, they will be able to make an account. Creating an account requires a unique username, password, email, and user nickname.
@@ -37,12 +56,3 @@ Here the user is able to add questions from their question bank to a group. The 
 #### View Results
 
 Here the user is able to view the results from a voting session. The results will only be available after a live session has ended. The user will need the session ID in order to view the results for a specific session.
-
-## Technologies
-
-The You Choose app will require that the user log in with their username and password. This way they can access their own personal question bank. The questions users add to their question bank as well as the results from voting sessions will be stored in the database. Results will be deleted from the database after 24 hours. The websocket data that will be used in this app is the realtime votes each user is submitting.
-
-## Rough Sketch
-![Screenshot 2023-09-23 164216](https://github.com/danielhatch7/startup/assets/97316307/4bb8958d-a5b5-4195-9de2-759d139e70e4)
-
-Embedded image here
