@@ -35,7 +35,13 @@ The login page is where the user will log into their account. If the user does n
 
 ### Home Page
 
-The home page is the main place for users to access all of the features within the app. The user can either join a live voting session, start a live voting session, add questions to their own personal question bank, or create question groups.
+The home page is the main place for users to access all of the features within the app. The user can either join a live voting session, start a live voting session, add questions to their own personal question bank, or create question groups. The home page will have the following options:
+
+1. **Join Live Session**
+2. **Start Voting Session**
+3. **Question Bank**
+4. **Question Group**
+5. **View Results**
 
 #### Join Live Session
 
