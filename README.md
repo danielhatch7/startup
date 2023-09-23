@@ -43,5 +43,6 @@ Here the user is able to view the results from a voting session. The results wil
 The You Choose app will require that the user log in with their username and password. This way they can access their own personal question bank. The questions users add to their question bank as well as the results from voting sessions will be stored in the database. Results will be deleted from the database after 24 hours. The websocket data that will be used in this app is the realtime votes each user is submitting.
 
 ## Rough Sketch
+![Screenshot 2023-09-23 164216](https://github.com/danielhatch7/startup/assets/97316307/4bb8958d-a5b5-4195-9de2-759d139e70e4)
 
 Embedded image here
