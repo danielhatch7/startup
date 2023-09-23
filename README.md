@@ -1,6 +1,6 @@
 # CS 260 Startup - You Choose - Voting App
 
-This is the readme file for my CS 260 startup application project
+This is the readme file for my CS 260 startup application project, the You Choose voting web app. 
 
 ## Elevator Pitch
 
