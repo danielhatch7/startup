@@ -66,8 +66,9 @@ For this deliverable I built out the structure of my application using HTML.
   - **results.html** - Asks for session ID before directing to resultsView.html
   - **resultsView.html** - Shows the results for a given session
 - **Links** - All of the pages listed above link to the correct page after submitting the appropriate data.
+- **3rd Party** - Appropriate placeholders have been used to represent 3rd party service calls.
 - **Text** - All of the pages contain textual context so that it is clear what each page is used for. Each page has placeholder text to represent what will be replaced by user submitted text.
 - **Images** - I created and implemented a favicon image utilizing the initials of my app title - "YC". My application does not require any other images
-- **Login** - There is an input box for a username and password. There is also a submit button for login. On the account.html page there are more input boxes for username, password, name, and email, which are used for account creation.
+- **Login** - There is an input box for a username and password. There is also a submit button for login. On the account.html page there are more input boxes for username, password, name, and email, which are used for account creation. The user's name is displayed on the home page.
 - **Database** - The question and voting choices represent data pulled from the database on the voting page. The voting results represent data pulled from the database on the results page.
 - **WebSocket** - The count of voting results represent the tally of realtime votes.
