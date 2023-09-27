@@ -1,6 +1,6 @@
 # CS 260 Startup - You Choose - Voting App
 
-This is the readme file for my CS 260 startup application project, the You Choose voting web app. 
+This is the readme file for my CS 260 startup application project, the You Choose voting web app.
 
 ## Elevator Pitch
 
@@ -12,8 +12,6 @@ Below are a few of the main features you will find within the You Choose app.
 
 - Secure log in using HTTPS
 - Ability to join or start a live voting session
-- Ability to add a question to a personal question bank
-- Ability to add a question to a question group
 - Ability to view results for a live voting session
 - Users can choose top choice
 
@@ -22,7 +20,7 @@ Below are a few of the main features you will find within the You Choose app.
 I will utilize the following technologies.
 
 - **Authentication:** The You Choose app will require that the user log in with their username and password. This way they can access their own personal question bank.
-- **Database:** The questions users add to their question bank as well as the results from voting sessions will be stored in the database. Results will be deleted from the database after 24 hours.
+- **Database:** The user account data as well as the results for each session will be stored in the DB.
 - **WebSocket Data:** The websocket data that will be used in this app is the realtime votes each user is submitting.
 
 ## Rough Sketch
@@ -35,13 +33,11 @@ The login page is where the user will log into their account. If the user does n
 
 ### Home Page
 
-The home page is the main place for users to access all of the features within the app. The user can either join a live voting session, start a live voting session, add questions to their own personal question bank, or create question groups. The home page will have the following options:
+The home page is the main place for users to access all of the features within the app. The user can either join a live voting session, start a live voting session, or view results. The home page will have the following options:
 
 1. **Join Live Session**
 2. **Start Voting Session**
-3. **Question Bank**
-4. **Question Group**
-5. **View Results**
+3. **View Results**
 
 #### Join Live Session
 
@@ -49,16 +45,29 @@ Here the user is able to join a live voting session. The user will need the sess
 
 #### Start Voting Session
 
-Here the user is able to start a live voting session. The user will have to choose either a question group or a specific question that they already added to their question bank in order to start a voting session. The user who starts a voting session will be designated as the host. When starting a session, the host will get the choice to decide how long the session is active. If no time limit is given, the session will only stay live while the host is connected to the session. The host can also give users multiple votes for the same question.
-
-#### Question Bank
-
-Here the user is able to add questions to their own personal question bank. Each of these questions will be a multiple choice questions and the user will need to determine what the possible options are to be voted for.
-
-#### Question Group
-
-Here the user is able to add questions from their question bank to a group. The same question can be used in multiple question groups. The question groups allow multiple questions to be voted on during a session.
+Here the user is able to start a live voting session. The user will have to choose a question in order to start a voting session. The user who starts a voting session will be designated as the host. When starting a session, the host will get the choice to decide how long the session is active. If no time limit is given, the session will only stay live while the host is connected to the session. The host can also give users multiple votes for the same question.
 
 #### View Results
 
 Here the user is able to view the results from a voting session. The results will only be available after a live session has ended. The user will need the session ID in order to view the results for a specific session.
+
+## HTML Deliverable
+
+For this deliverable I built out the structure of my application using HTML.
+
+- **HTML Pages** - 9 HTML pages that represent the following abilities
+  - **index.html** - Login page
+  - **account.html** - Allows a user to create an account
+  - **home.html** - Main home page to access all other application features
+  - **join.html** - Asks for session ID before directing to live.html
+  - **live.html** - Allows users to vote and see results live
+  - **start.html** - Asks host for question/answers before directing to hostView.html
+  - **hostView.html** - Shows host live results. Allows host to end session.
+  - **results.html** - Asks for session ID before directing to resultsView.html
+  - **resultsView.html** - Shows the results for a given session
+- **Links** - All of the pages listed above link to the correct page after submitting the appropriate data.
+- **Text** - All of the pages contain textual context so that it is clear what each page is used for. Each page has placeholder text to represent what will be replaced by user submitted text.
+- **Images** - I created and implemented a favicon image utilizing the initials of my app title - "YC". My application does not require any other images
+- **Login** - There is an input box for a username and password. There is also a submit button for login. On the account.html page there are more input boxes for username, password, name, and email, which are used for account creation.
+- **Database** - The question and voting choices represent data pulled from the database on the voting page. The voting results represent data pulled from the database on the results page.
+- **WebSocket** - The count of voting results represent the tally of realtime votes.
