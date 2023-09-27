@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- Tell browsers not to scale the viewport automatically -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You Choose</title>
+  <link rel="icon" href="./images/favicon_io/favicon.ico" />
+</head>
+
+<body>
+  <!-- Use header, main, and footer elements to give semantic structure -->
+  <header>
+    <h1>You Choose<sup>&reg;</sup></h1>
+
+    <!-- Navigation elements -->
+    <nav>
+      <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
+      <menu>
+        <li><a href="index.html">Login</a></li>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="start.html">Start</a></li>
+        <li><a href="results.html">Results</a></li>
+        <li><a href="account.html">Create Account</a></li>
+      </menu>
+    </nav>
+
+    <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
+    <hr />
+  </header>
+
+  <main>
+    <h1>Create An Account</h1>
+    <p>Enter your information below</p>
+    <form method="get" action="home.html">
+      <label for="name">Name</label>
+      <input type="text" id="name" placeholder="Your name here" />
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="Your name here" />
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="password" />
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="email@example.com" />
+      <button type="submit">Create Account</button>
+    </form>
+
+  </main>
+
+  <footer>
+    <hr />
+    <span class="text-reset">Author Name(s)</span>
+    <br />
+    <a href="https://github.com/danielhatch7/startup.git">GitHub</a>
+  </footer>
+</body>
+
+</html>

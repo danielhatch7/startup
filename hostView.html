@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- Tell browsers not to scale the viewport automatically -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You Choose</title>
+  <link rel="icon" href="./images/favicon_io/favicon.ico" />
+</head>
+
+<body>
+  <!-- Use header, main, and footer elements to give semantic structure -->
+  <header>
+    <h1>You Choose<sup>&reg;</sup></h1>
+
+    <!-- Navigation elements -->
+    <nav>
+      <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
+      <menu>
+        <li><a href="index.html">Login</a></li>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="start.html">Start</a></li>
+        <li><a href="results.html">Results</a></li>
+        <li><a href="account.html">Create Account</a></li>
+      </menu>
+    </nav>
+
+    <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
+    <hr />
+  </header>
+
+  <main>
+    <h1>Host View</h1>
+    <p>Share the session ID with your friends so they can start voting, then watch below you will see the live results
+      as they come in!</p>
+    <div>
+      <label for="sessionID">Session ID:</label>
+      <input type="text" id="sessionID" value="1234" readonly />
+    </div>
+    <h2>Question: <span class="live-question">What is your favorite color?</span></h2>
+
+
+    <div>
+      <p>Current Results</p>
+
+      <label for="result1">Red:</label>
+      <input type="text" id="result1" value="--" readonly />
+      <label for="result2">Blue:</label>
+      <input type="text" id="result2" value="--" readonly />
+      <label for="result3">Green:</label>
+      <input type="text" id="result3" value="--" readonly />
+      <label for="result4">Yellow:</label>
+      <input type="text" id="result4" value="--" readonly />
+
+    </div>
+
+    <div>
+      <label for="sessionID">Session ID:</label>
+      <input type="text" id="sessionID" value="1234" readonly />
+    </div>
+
+    <button type="submit"><a href="resultsView.html">End Session</a></button>
+  </main>
+
+  <footer>
+    <hr />
+    <span class="text-reset">Author Name(s)</span>
+    <br />
+    <a href="https://github.com/danielhatch7/startup.git">GitHub</a>
+  </footer>
+</body>
+
+</html>
