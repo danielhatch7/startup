@@ -7,68 +7,84 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>You Choose</title>
   <link rel="icon" href="./images/favicon_io/favicon.ico" />
+
+  <link rel="stylesheet" href="main.css" />
+
+  <!-- Include bootstrap CSS framework -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+
 </head>
 
-<body>
-  <!-- Use header, main, and footer elements to give semantic structure -->
-  <header>
-    <h1>You Choose<sup>&reg;</sup></h1>
-
-    <!-- Navigation elements -->
-    <nav>
-      <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
-      <menu>
-        <li><a href="index.html">Login</a></li>
-        <li><a href="home.html">Home</a></li>
-        <li><a href="join.html">Join</a></li>
-        <li><a href="start.html">Start</a></li>
-        <li><a href="results.html">Results</a></li>
-        <li><a href="account.html">Create Account</a></li>
+<body class="bg-primary text-light">
+  <header class="container-fluid">
+    <nav class="navbar fixed-top navbar-dark">
+      <a class="navbar-brand" href="#">You Choose<sup>&reg;</sup></a>
+      <menu class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="home.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="join.html">Join</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="start.html">Start</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="results.html">Results</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="account.html">Create Account</a>
+        </li>
       </menu>
     </nav>
-
-    <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
-    <hr />
   </header>
 
-  <main>
-    <h1>Start Session</h1>
-    <p>Enter a question to start a live voting session.</p>
-    <form method="get" action="hostView.html">
-      <label for="question">Question</label>
-      <input type="text" id="question" placeholder="Your question here" />
-      <ul>
-        <li>
+  <main class="container-fluid bg-light text-center text-dark">
+    <div>
+      <h1>Start Session</h1>
+
+      <p>Enter a question to start a live voting session.</p>
+      <form method="get" action="hostView.html" class="row border border-primary rounded gy-3 mt-5">
+        <div class="col-12">
+          <label for="question">Question</label>
+          <input type="text" id="question" placeholder="Your question here" />
+        </div>
+        <div class="col-12">
           <label for="answer_1">Answer 1</label>
           <input type="text" id="answer_1" placeholder="Answer 1" />
-        </li>
-        <li>
+        </div>
+        <div class="col-12">
           <label for="answer_2">Answer 2</label>
           <input type="text" id="answer_2" placeholder="Answer 2" />
-        </li>
-        <li>
+        </div>
+        <div class="col-12">
           <label for="answer_3">Answer 3</label>
           <input type="text" id="answer_3" placeholder="Answer 3" />
-        </li>
-        <li>
+        </div>
+        <div class="col-12">
           <label for="answer_4">Answer 4</label>
           <input type="text" id="answer_4" placeholder="Answer 4" />
-        </li>
-        <li>
-          <button type="button">Add Additional Answer</button>
-        </li>
-      </ul>
+        </div>
+        <div>
+          <button type="button" class="btn btn-outline-primary col">Add Additional Answer</button>
+        </div>
 
-      <button type="submit">Start Live Session</button>
-    </form>
-
+        <div>
+          <button type="submit" class="btn btn-primary mt-3 mb-3">Start Live Session</button>
+        </div>
+      </form>
+    </div>
   </main>
 
-  <footer>
-    <hr />
-    <span class="text-reset">Author Name(s)</span>
-    <br />
-    <a href="https://github.com/danielhatch7/startup.git">GitHub</a>
+  <footer class="bg-primary text-white">
+    <div class="container-fluid">
+      <span class="text-reset">Daniel Hatch</span>
+      <a class="text-reset home-options" href="https://github.com/danielhatch7/startup.git">Source</a>
+    </div>
   </footer>
 </body>
 

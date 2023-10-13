@@ -72,3 +72,14 @@ For this deliverable I built out the structure of my application using HTML.
 - **Login** - There is an input box for a username and password. There is also a submit button for login. On the account.html page there are more input boxes for username, password, name, and email, which are used for account creation. The user's name is displayed on the home page.
 - **Database** - The question and voting choices represent data pulled from the database on the voting page. The voting results represent data pulled from the database on the results page.
 - **WebSocket** - The count of voting results represent the tally of realtime votes.
+
+## CSS Deliverable
+
+For this deliverable I properly styled the application into its final appearance.
+
+- **Header, footer, and main content body** - I gave a layout for the header, footer, and main body content. Gave header and footer a blue background.
+- **Navigation elements** - I made it so that the anchor for the active page is highlighted. Made text white so it can be seen on blue background.
+- **Responsive to window sizing** - The app responds to all window sizes and devices to look good.
+- **Application elements** - I made sure that each element had adequate whitespace so that it looks good.
+- **Application text content** - I changed text color to make sure that all text has good contrast with its background. I also made sure that fonts were consistent throughout the app.
+- **Application images** - I made sure that the favicon images show up correctly. My app does not require any other images.
