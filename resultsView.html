@@ -43,8 +43,8 @@
   <main class="container-fluid bg-light text-center text-dark">
     <div>
       <h1>Results</h1>
-      <p>Below are the results for session <span class="sessionID">1234</span></p>
-      <h3>Question: <span class="live-question">What is your favorite color?</span></h3>
+      <p>Below are the results for session <span class="session-ID">1234</span></p>
+      <h3>Question: <span class="live-question"></span></h3>
 
       <div class="container mt-4">
         <h3>Results</h3>
@@ -55,34 +55,13 @@
               <th>Result</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <th>&#60;option 1&#62;:</th>
-              <th><input type="text" id="result1" value="--" readonly /></th>
-            </tr>
-            <tr>
-              <th>&#60;option 2&#62;:</th>
-              <th><input type="text" id="result2" value="--" readonly /></th>
-            </tr>
-            <tr>
-              <th>&#60;option 3&#62;:</th>
-              <th><input type="text" id="result3" value="--" readonly /></th>
-            </tr>
-            <tr>
-              <th>&#60;option 4&#62;:</th>
-              <th><input type="text" id="result4" value="--" readonly /></th>
-            </tr>
-            <tr>
-              <th>Total Voters:</th>
-              <th><input type="text" id="total-voters" value="--" readonly /></th>
-            </tr>
-          </tbody>
+          <tbody id="results"></tbody>
         </table>
       </div>
 
       <div>
         <label for="session-live">The session is: </label>
-        <input type="text" id="session-live" value="insert live or finished here" readonly />
+        <span class="live_status"></span>
       </div>
 
       <button type="submit" class="btn btn-primary mt-3"><a class="text-white home-options" href="home.html">Return
@@ -96,6 +75,7 @@
       <a class="text-reset" href="https://github.com/danielhatch7/startup.git">Source</a>
     </div>
   </footer>
+  <script src="results.js"></script>
 </body>
 
 </html>

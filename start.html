@@ -45,7 +45,7 @@
       <h1>Start Session</h1>
 
       <p>Enter a question to start a live voting session.</p>
-      <form method="get" action="hostView.html" class="row border border-primary rounded gy-3 mt-5">
+      <form method="get" action="hostView.html" class="row  gy-3 mt-5">
         <div class="col-12">
           <label for="question">Question</label>
           <input type="text" id="question" placeholder="Your question here" />
@@ -71,7 +71,7 @@
         </div>
 
         <div>
-          <button type="submit" class="btn btn-primary mt-3 mb-3">Start Live Session</button>
+          <button class="btn btn-primary" onclick="start()">Start Live Session</button>
         </div>
       </form>
     </div>
@@ -83,6 +83,7 @@
       <a class="text-reset home-options" href="https://github.com/danielhatch7/startup.git">Source</a>
     </div>
   </footer>
+  <script src="start.js"></script>
 </body>
 
 </html>

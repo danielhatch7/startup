@@ -46,8 +46,8 @@
       <p>Share the session ID with your friends so they can start voting, then watch below you will see the live results
         as they come in!</p>
       <div>
-        <label for="sessionID">Session ID:</label>
-        <input type="text" id="sessionID" value="1234" readonly />
+        <label for="session-ID">Session ID:</label>
+        <span class="session-ID"></span>
       </div>
       <h3 class="mt-3">Question: <span class="live-question">What is your favorite color?</span></h3>
 
@@ -61,28 +61,7 @@
               <th>Result</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <th>&#60;option 1&#62;:</th>
-              <th><input type="text" id="result1" value="--" readonly /></th>
-            </tr>
-            <tr>
-              <th>&#60;option 2&#62;:</th>
-              <th><input type="text" id="result2" value="--" readonly /></th>
-            </tr>
-            <tr>
-              <th>&#60;option 3&#62;:</th>
-              <th><input type="text" id="result3" value="--" readonly /></th>
-            </tr>
-            <tr>
-              <th>&#60;option 4&#62;:</th>
-              <th><input type="text" id="result4" value="--" readonly /></th>
-            </tr>
-            <tr>
-              <th>Total Voters:</th>
-              <th><input type="text" id="total-voters" value="--" readonly /></th>
-            </tr>
-          </tbody>
+          <tbody id="results"></tbody>
         </table>
       </div>
 
@@ -99,6 +78,7 @@
       <a class="text-reset" href="https://github.com/danielhatch7/startup.git">Source</a>
     </div>
   </footer>
+  <script src="hostView.js"></script>
 </body>
 
 </html>
