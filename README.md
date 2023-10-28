@@ -90,5 +90,5 @@ For this deliverable, I implemented the JavaScript so that the application works
 
 - **Login** - When you press enter or the login button it takes you to the home page and displays the user's name.
 - **Database** - The voting results and counts are pulled from the database. Currently this is stored and retrieved from local storage, but it will be replaced with the database data later.
-- **WebSocket** - I used the is_live variable to mark whether or not a voting session is live. This will later be replaced with WebSocket messages.
+- **WebSocket** - I used the is_live variable to mark whether or not a voting session is live. This will later be replaced with WebSocket messages. WebSocket messages are also used on the hostView page to notify when users join the voting session or cast a vote.
 - **Application Logic** - The highlight and voting results change based up the user's selections.
