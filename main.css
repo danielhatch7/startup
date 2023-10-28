@@ -1,11 +1,14 @@
 body {
+  margin-top: 100px;
   display: flex;
   flex-direction: column;
   min-width: 375px;
 }
 
 header {
+  position: sticky;
   flex: 0 80px;
+  z-index: 999;
 }
 
 main {
