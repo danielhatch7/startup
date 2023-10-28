@@ -43,7 +43,7 @@
   <main class="container-fluid bg-light text-center text-dark">
     <div>
       <h1>Live Voting!</h1>
-      <p>Cast your vote to see the live results!</p>
+      <p>Cast your vote and watch the live results!</p>
 
       <div class="container mt-4">
         <h3>Question: <span class="live-question">&#60;insert question here&#62;</span></h3>
@@ -54,17 +54,21 @@
               <legend>Answers</legend>
             </div>
             <div class="btn-group" role="group">
-              <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
-              <label class="btn btn-outline-primary" for="btnradio1">Option 1</label>
+              <input type="radio" class="btn-check voting-button" name="btnradio" id="btnradio0" autocomplete="off"
+                onclick="session.pressButton(this)">
+              <label class="btn btn-outline-primary" for="btnradio0">Option 1</label>
 
-              <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-              <label class="btn btn-outline-primary" for="btnradio2">Option 2</label>
+              <input type="radio" class="btn-check voting-button" name="btnradio" id="btnradio1" autocomplete="off"
+                onclick="session.pressButton(this)">
+              <label class="btn btn-outline-primary" for="btnradio1">Option 2</label>
 
-              <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-              <label class="btn btn-outline-primary" for="btnradio3">Option 3</label>
+              <input type="radio" class="btn-check voting-button" name="btnradio" id="btnradio2" autocomplete="off"
+                onclick="session.pressButton(this)">
+              <label class="btn btn-outline-primary" for="btnradio2">Option 3</label>
 
-              <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
-              <label class="btn btn-outline-primary" for="btnradio4">Option 4</label>
+              <input type="radio" class="btn-check voting-button" name="btnradio" id="btnradio3" autocomplete="off"
+                onclick="session.pressButton(this)">
+              <label class="btn btn-outline-primary" for="btnradio3">Option 4</label>
 
 
               <!-- <div class="row">
@@ -93,33 +97,12 @@
               <th>Result</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <th>&#60;option 1&#62;:</th>
-              <th><input type="text" id="result1" value="--" readonly /></th>
-            </tr>
-            <tr>
-              <th>&#60;option 2&#62;:</th>
-              <th><input type="text" id="result2" value="--" readonly /></th>
-            </tr>
-            <tr>
-              <th>&#60;option 3&#62;:</th>
-              <th><input type="text" id="result3" value="--" readonly /></th>
-            </tr>
-            <tr>
-              <th>&#60;option 4&#62;:</th>
-              <th><input type="text" id="result4" value="--" readonly /></th>
-            </tr>
-            <tr>
-              <th>Total Voters:</th>
-              <th><input type="text" id="total-voters" value="--" readonly /></th>
-            </tr>
-          </tbody>
+          <tbody id="results"></tbody>
         </table>
       </div>
 
       <div>
-        <label for="sessionID">Session ID:</label>
+        <span for="sessionID">Session ID:</span>
         <span class="session-ID"></span>
       </div>
 

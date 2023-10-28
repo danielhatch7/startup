@@ -83,3 +83,12 @@ For this deliverable I properly styled the application into its final appearance
 - **Application elements** - I made sure that each element had adequate whitespace so that it looks good.
 - **Application text content** - I changed text color to make sure that all text has good contrast with its background. I also made sure that fonts were consistent throughout the app.
 - **Application images** - I made sure that the favicon images show up correctly. My app does not require any other images.
+
+## JavaScript Deliverable
+
+For this deliverable, I implemented the JavaScript so that the application works for a single user and added placeholders for future technology.
+
+- **Login** - When you press enter or the login button it takes you to the home page and displays the user's name.
+- **Database** - The voting results and counts are pulled from the database. Currently this is stored and retrieved from local storage, but it will be replaced with the database data later.
+- **WebSocket** - I used the is_live variable to mark whether or not a voting session is live. This will later be replaced with WebSocket messages.
+- **Application Logic** - The highlight and voting results change based up the user's selections.

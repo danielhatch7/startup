@@ -11,15 +11,22 @@ class Session {
 
     loadResults();
 
+    const host_name = document.querySelector(".voter-name");
+    host_name.textContent = this.getHostName();
+
     const live_status = document.querySelector(".live_status");
     let live = this.getLiveStatus();
     if (live) {
-      live_status.textContent = "LIVE";
+      live_status.textContent = "session LIVE";
     } else [(live_status.textContent = "NOT LIVE")];
   }
 
   getSessionID() {
     return localStorage.getItem("sessionID") ?? "unknown";
+  }
+
+  getHostName() {
+    return localStorage.getItem("userName") ?? "unknown";
   }
 
   getLiveStatus() {
@@ -97,3 +104,124 @@ function loadResults() {
 
 //loadData(sessionID);
 const session = new Session();
+
+function end() {
+  // TODO fill this in
+  localStorage.setItem("is_live", false);
+  window.location.href = "resultsView.html";
+}
+
+setInterval(() => {
+  const statuses = ["joined", "voted"];
+  const names = [
+    "Daniel",
+    "Hannah",
+    "Jacob",
+    "Sarah",
+    "Paul",
+    "Joseph",
+    "Christopher",
+    "Alice",
+    "Bob",
+    "Carol",
+    "Dave",
+    "Eve",
+    "Frank",
+    "George",
+    "Hannah",
+    "Ian",
+    "Jack",
+    "Jill",
+    "John",
+    "Joseph",
+    "Karen",
+    "Kevin",
+    "Lisa",
+    "Luke",
+    "Mary",
+    "Matthew",
+    "Michael",
+    "Michelle",
+    "Nathan",
+    "Olivia",
+    "Peter",
+    "Rachel",
+    "Rebecca",
+    "Richard",
+    "Robert",
+    "Sarah",
+    "Scott",
+    "Stephen",
+    "Susan",
+    "Thomas",
+    "Timothy",
+    "Victoria",
+    "William",
+    "Zachary",
+    "Amelia",
+    "Ava",
+    "Benjamin",
+    "Caleb",
+    "Charlotte",
+    "Connor",
+    "Elijah",
+    "Emma",
+    "Ethan",
+    "Everleigh",
+    "Faith",
+    "Harper",
+    "Henry",
+    "Isabel",
+    "Jack",
+    "Jaiden",
+    "Jasmine",
+    "Jayden",
+    "Jennifer",
+    "John",
+    "Josephine",
+    "Joshua",
+    "Julia",
+    "Julian",
+    "Liam",
+    "Lily",
+    "Logan",
+    "Lucas",
+    "Lucy",
+    "Madeline",
+    "Madison",
+    "Matthew",
+    "Maya",
+    "Michael",
+    "Mia",
+    "Nathan",
+    "Noah",
+    "Olivia",
+    "Owen",
+    "Paige",
+    "Parker",
+    "Patrick",
+    "Peter",
+    " Peyton",
+    "Rachel",
+    "Rebecca",
+    "Riley",
+    "Robert",
+    "Ryan",
+    "Sarah",
+    "Sophia",
+    "Sydney",
+    "Taylor",
+    "Thomas",
+    "William",
+  ];
+  let status = statuses[getRandomInt(statuses.length)];
+  let name = names[getRandomInt(names.length)];
+  const chatText = document.querySelector("#voter-messages");
+  chatText.innerHTML =
+    `<div class="event"><span class="voter-event voter-name">${name} </span>${status}</div>` +
+    chatText.innerHTML;
+}, 10000);
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}

@@ -57,3 +57,24 @@ footer a {
     flex: 1 100vh;
   }
 }
+
+.voters {
+  flex: 1;
+  width: 100%;
+  padding: 6em 0.5em;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20%;
+  height: 20%;
+  z-index: 99;
+}
+
+.voter-name {
+  color: rgb(118, 190, 210);
+}
+
+#voter-messages {
+  padding-top: 0.25em;
+  opacity: 0.7;
+}

@@ -40,10 +40,21 @@
     </nav>
   </header>
 
-  <main class="container-fluid bg-light text-center text-dark">
-    <div>
+  <main class="bg-light text-dark">
+    <div class="voters">
+      Host:
+      <span class="voter-name"></span>
+      <div id="voter-messages">
+        <div class="event"><span class="voter-event voter-name">Hannah</span> joined</div>
+        <div class="event"><span class="voter-event voter-name">Jacob</span> voted</div>
+        <div class="event"><span class="system-event live_status">session</span></div>
+      </div>
+    </div>
+
+    <div class="container-fluid bg-light text-center text-dark">
       <h1>Host View</h1>
-      <p>Share the session ID with your friends so they can start voting, then watch below you will see the live results
+      <p>Share the session ID with your friends so they can start voting</p>
+      <p>Then watch below you to see the live results
         as they come in!</p>
       <div>
         <label for="session-ID">Session ID:</label>
@@ -66,9 +77,9 @@
       </div>
 
 
+      <button class="btn btn-primary" onclick="end()">End Session</button>
 
-      <button type="submit" class="btn btn-primary"><a href="resultsView.html" class="text-white home-options">End
-          Session</a></button>
+
     </div>
   </main>
 
