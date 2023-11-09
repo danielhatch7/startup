@@ -15,31 +15,35 @@ const apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 // GetResults TODO: FINISH
-apiRouter.get("/results", (_req, res) => {
-  session_results = getResults(_req.body.sessionID);
+apiRouter.get("/results/*", (_req, res) => {
+  let sessionID = getSessionID(_req.originalUrl);
+  let session_results = getResults(sessionID);
   res.send(session_results);
 });
 
 // GetInfo TODO: FINISH
-apiRouter.get("/info", (_req, res) => {
-  session_info = getInfo(_req.body.sessionID);
+apiRouter.get("/info/*", (_req, res) => {
+  let sessionID = getSessionID(_req.originalUrl);
+  let session_info = getInfo(sessionID);
   res.send(session_info);
 });
 
 // GetValid TODO: FINISH
-apiRouter.get("/valid", (_req, res) => {
-  session_valid = getValid(_req.body.sessionID);
-  res.send(session_valid);
+apiRouter.post("/valid/*", (req, res) => {
+  let sessionID = getSessionID(req.originalUrl);
+  valid = getValid(req.body, valid);
+
+  res.send(valid);
 });
 
 // StartSession TODO: FINISH
 apiRouter.put("/start", (req, res) => {
-  scores = startSession(req.body);
+  startSession(req.body);
 });
 
 // SubmitVote TODO: FINISH
-apiRouter.post("/vote", (req, res) => {
-  session_results = updateVote(req.body, scores);
+apiRouter.post("/vote/*", (req, res) => {
+  session_results = updateVote(req.body);
   res.send(session_results);
 });
 
@@ -55,6 +59,15 @@ app.listen(port, () => {
 // The results and info are saved in memory and disappear whenever the service is restarted.
 let results = new Map();
 let info = new Map();
+let voters = new Map();
+let valid = [];
+
+// TODO: FINISH
+function getSessionID(URL) {
+  let pieces = URL.split("/");
+  let sessionID = pieces[pieces.length - 1];
+  return sessionID;
+}
 
 // TODO: FINISH
 function startSession(session_info) {
@@ -64,9 +77,18 @@ function startSession(session_info) {
   let response2 = session_info.response2;
   let response3 = session_info.response3;
   let response4 = session_info.response4;
+  let is_live = session_info.is_live;
 
-  info.set(sessionID, [question, response1, response2, response3, response4]);
+  info.set(sessionID, [
+    question,
+    response1,
+    response2,
+    response3,
+    response4,
+    is_live,
+  ]);
   results.set(sessionID, [0, 0, 0, 0]);
+  voters.set(sessionID, []);
 }
 
 // TODO: FINISH
@@ -82,41 +104,57 @@ function getInfo(sessionID) {
 }
 
 // TODO: FINISH
-function getInfo(sessionID) {
-  let valid = info.has(sessionID);
+function getValid(body, valid) {
+  valid.length = 0;
+  let sessionID = body.sessionID;
+  let temp = info.has(sessionID);
+
+  body.valid = temp;
+
+  if (temp) {
+    body.message = "";
+  } else {
+    body.message = "Invalid SessionID. Please try again.";
+  }
+  valid.push(body);
+
   return valid;
 }
 
 // TODO: FINISH
 function updateVote(vote_info) {
   let sessionID = vote_info.sessionID;
-  let username = vote_info.username;
+  let username = vote_info.userName;
   let vote = vote_info.vote;
+  let vote_index = parseInt(vote[vote.length - 1]);
 
   // FINISH
+  let ballots = voters.get(sessionID);
+  let old_vote = 4;
+  let ballot_index = ballots.length;
 
-  let temp = results.get(sessionID);
-  return temp;
-}
-
-// The high scores are saved in memory and disappear whenever the service is restarted.
-function updateScores(newScore, scores) {
-  let found = false;
-  for (const [i, prevScore] of scores.entries()) {
-    if (newScore.score > prevScore.score) {
-      scores.splice(i, 0, newScore);
-      found = true;
-      break;
+  for (let i = 0; i < ballots.length; i++) {
+    if (ballots[i].userName === username) {
+      old_vote = ballots[i].vote;
+      ballot_index = i;
     }
   }
 
-  if (!found) {
-    scores.push(newScore);
+  let temp = results.get(sessionID);
+
+  if (old_vote != 4) {
+    temp[old_vote] -= 1;
   }
 
-  if (scores.length > 10) {
-    scores.length = 10;
+  if (ballot_index === ballots.length) {
+    ballots.push({ userName: username, vote: vote_index });
+  } else {
+    ballots[ballot_index] = { userName: username, vote: vote_index };
   }
 
-  return scores;
+  temp[vote_index] += 1;
+
+  voters.set(sessionID, ballots);
+  results.set(sessionID, temp);
+  return temp;
 }

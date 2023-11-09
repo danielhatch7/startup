@@ -14,7 +14,12 @@ function start() {
   if (questionEl.value != "") {
     localStorage.setItem("question", questionEl.value);
 
-    const question = "What is your favorite color?";
+    const question = questionEl.value;
+    const response1 = answer1El.value;
+    const response2 = answer2El.value;
+    const response3 = answer3El.value;
+    const response4 = answer4El.value;
+
     const results = JSON.stringify([
       { response: answer1El.value, result: 0 },
       { response: answer2El.value, result: 0 },
@@ -27,8 +32,20 @@ function start() {
     localStorage.setItem("results", results);
     localStorage.setItem("is_live", is_live);
 
-    let idNumber = this.generateSessionID().toString();
+    let idNumber = this.generateRandomNumber().toString();
     localStorage.setItem("sessionID", idNumber);
+
+    const info = [
+      idNumber,
+      is_live,
+      question,
+      response1,
+      response2,
+      response3,
+      response4,
+    ];
+
+    sendInfo(info);
 
     window.location.href = "hostView.html";
   }
@@ -44,5 +61,33 @@ function add() {
   if (nameEl.value != "") {
     localStorage.setItem("userName", nameEl.value);
     window.location.href = "home.html";
+  }
+}
+
+async function sendInfo(info) {
+  const newRequest = {
+    sessionID: info[0],
+    is_live: info[1],
+    question: info[2],
+    response1: info[3],
+    response2: info[4],
+    response3: info[5],
+    response4: info[6],
+  };
+
+  try {
+    let request = "/api/start";
+    const response = await fetch(request, {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(newRequest),
+    });
+    const output = await response.json();
+    // TODO FINISH
+  } catch (err) {
+    // TODO FINISH
+    console.log("something happened");
+    doSomething(err);
+    console.log(err);
   }
 }

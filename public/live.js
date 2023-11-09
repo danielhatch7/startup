@@ -15,31 +15,19 @@ class Button {
 class Session {
   buttons;
   current_vote;
+  sessionID;
 
   constructor() {
     this.buttons = new Map();
     this.current_vote = "";
     localStorage.setItem("current_vote", this.current_vote);
 
-    const sessionID = document.querySelector(".session-ID");
-    sessionID.textContent = this.getSessionID();
+    const sessionIDElement = document.querySelector(".session-ID");
+    this.sessionID = this.getSessionID();
+    sessionIDElement.textContent = this.sessionID;
 
-    loadData();
-
-    const question = document.querySelector(".live-question");
-    question.textContent = this.getQuestion();
-
-    loadResults();
-
-    document.querySelectorAll(".voting-button").forEach((el, i) => {
-      if (i < btnDescriptions.length) {
-        this.buttons.set(el.id, new Button(btnDescriptions[i], el));
-      }
-    });
-  }
-
-  getQuestion() {
-    return localStorage.getItem("question") ?? "Unknown";
+    loadInfo(this.sessionID);
+    loadData(this.sessionID);
   }
 
   getSessionID() {
@@ -50,30 +38,119 @@ class Session {
     const vote = button.id;
     this.current_vote = vote;
     localStorage.setItem("current_vote", this.current_vote);
+    submitVote(this.sessionID, vote);
     loadResults();
   }
+
+  setButtons() {
+    document.querySelectorAll(".voting-button").forEach((el, i) => {
+      if (i < btnDescriptions.length) {
+        this.buttons.set(el.id, new Button(btnDescriptions[i], el));
+      }
+    });
+  }
+}
+
+function getQuestion() {
+  return localStorage.getItem("question") ?? "Unknown";
+}
+
+function finishSetup() {
+  const question = document.querySelector(".live-question");
+  question.textContent = this.getQuestion();
+
+  loadResults();
+  setButtons();
 }
 
 const session = new Session();
 
-function loadData() {
-  // get data from database
-  // insert data into database
+async function loadInfo(sessionID) {
+  try {
+    request = "/api/info/" + sessionID;
+    const response2 = await fetch(request);
+    const info = await response2.json();
 
-  // temp placeholders
-  const question = "What is your favorite color?";
-  const results = JSON.stringify([
-    { response: "blue", result: 4 },
-    { response: "red", result: 3 },
-    { response: "yellow", result: 2 },
-    { response: "green", result: 5 },
-  ]);
+    localStorage.setItem("question", info[0]);
+    localStorage.setItem("is_live", info[info.length - 1]);
 
-  const is_live = true;
+    let responses = [info[1], info[2], info[3], info[4]];
+    localStorage.setItem("responses", responses);
 
-  localStorage.setItem("question", question);
-  localStorage.setItem("results", results);
-  localStorage.setItem("is_live", is_live);
+    const current_results = JSON.stringify([
+      { response: info[1], result: 0 },
+      { response: info[2], result: 0 },
+      { response: info[3], result: 0 },
+      { response: info[4], result: 0 },
+    ]);
+
+    localStorage.setItem("results", current_results);
+    finishSetup();
+  } catch (err) {
+    // TODO FINISH
+    console.log("something happened");
+    console.log(err);
+  }
+}
+
+async function loadData(sessionID) {
+  try {
+    let request = "/api/results/" + sessionID;
+    const response1 = await fetch(request);
+    const results = await response1.json();
+
+    let responses = localStorage.getItem("responses");
+    responses = responses.split(",");
+
+    const current_results = JSON.stringify([
+      { response: responses[0], result: results[0] },
+      { response: responses[1], result: results[1] },
+      { response: responses[2], result: results[2] },
+      { response: responses[3], result: results[3] },
+    ]);
+
+    localStorage.setItem("results", current_results);
+    loadResults();
+  } catch (err) {
+    // TODO FINISH
+    console.log("something happened");
+    console.log(err);
+  }
+}
+
+async function submitVote(sessionID, vote) {
+  let userName = localStorage.getItem("userName");
+  const newRequest = {
+    sessionID: sessionID,
+    vote: vote,
+    userName: userName,
+  };
+  try {
+    let request = "/api/vote/" + sessionID;
+    const response1 = await fetch(request, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(newRequest),
+    });
+    const results = await response1.json();
+
+    let responses = localStorage.getItem("responses");
+    responses = responses.split(",");
+
+    const current_results = JSON.stringify([
+      { response: responses[0], result: results[0] },
+      { response: responses[1], result: results[1] },
+      { response: responses[2], result: results[2] },
+      { response: responses[3], result: results[3] },
+    ]);
+
+    localStorage.setItem("results", current_results);
+    loadResults();
+  } catch (err) {
+    // TODO FINISH
+    console.log("something happened");
+    console.log(err);
+  }
 }
 
 function loadResults() {
@@ -101,9 +178,10 @@ function loadResults() {
       responseTdEl.textContent = line.response;
       let temp_result = line.result;
       let current_vote = localStorage.getItem("current_vote");
-      if (line_id == current_vote) {
-        temp_result += 1;
-      }
+      // Maybe use later for if server is down
+      // if (line_id == current_vote) {
+      //   temp_result += 1;
+      // }
       resultTdEl.textContent = temp_result;
 
       console.log(responseTdEl);

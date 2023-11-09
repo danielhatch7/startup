@@ -8,7 +8,7 @@
   <title>You Choose</title>
   <link rel="icon" href="./images/favicon_io/favicon.ico" />
 
-  <script src="session.js"></script>
+
   <link rel="stylesheet" href="main.css" />
 
   <!-- Include bootstrap CSS framework -->
@@ -52,8 +52,13 @@
             <input type="text" id="sessionID" placeholder="1234" class="form-control" />
           </div>
         </div>
-        <button class="btn btn-primary" onclick="session()">Join</button>
       </form>
+      <div class="mt-3">
+        <button class="btn btn-primary" onclick="getValid()">View Results</button>
+      </div>
+      <div class="mt-3">
+        <span id="error_message"></span>
+      </div>
     </div>
   </main>
 
@@ -63,6 +68,7 @@
       <a class="text-reset" href="https://github.com/danielhatch7/startup.git">Source</a>
     </div>
   </footer>
+  <script src="results.js"></script>
 </body>
 
 </html>

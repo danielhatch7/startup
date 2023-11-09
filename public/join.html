@@ -8,7 +8,7 @@
   <title>You Choose</title>
   <link rel="icon" href="./images/favicon_io/favicon.ico" />
 
-  <script src="session.js"></script>
+
   <link rel="stylesheet" href="main.css" />
 
   <!-- Include bootstrap CSS framework -->
@@ -45,17 +45,21 @@
     <div>
       <h1>Join Live Voting Session</h1>
       <p>Enter the session ID to join the live session</p>
-      <form method="get" action="live.html">
+      <form method="get">
         <div class="form-group row">
           <label for="sessionID" class="col-sm-3 col-form-label">Session ID</label>
           <div class="col-sm-9">
             <input type="text" id="sessionID" placeholder="1234" class="form-control" />
           </div>
         </div>
-        <div class="mt-3">
-          <button class="btn btn-primary" onclick="session()">Join</button>
-        </div>
+
       </form>
+      <div class="mt-3">
+        <button class="btn btn-primary" onclick="getValid()">Join</button>
+      </div>
+      <div class="mt-3">
+        <span id="error_message"></span>
+      </div>
     </div>
   </main>
 
@@ -65,6 +69,7 @@
       <a class="text-reset" href="https://github.com/danielhatch7/startup.git">Source</a>
     </div>
   </footer>
+  <script src="join.js"></script>
 </body>
 
 </html>

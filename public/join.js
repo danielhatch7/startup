@@ -3,7 +3,7 @@ function session() {
   const sessionID = document.querySelector("#sessionID");
   if (sessionID.value != "") {
     localStorage.setItem("sessionID", sessionID.value);
-    window.location.href = "resultsView.html";
+    window.location.href = "live.html";
     loadData();
   }
 }
@@ -16,12 +16,12 @@ function loadData(sessionID) {
   // const results = webData.results;
 
   // temp placeholders
-  const question = "...waiting on server...";
+  const question = "What is your favorite color?";
   const results = JSON.stringify([
-    { response: "response 1", result: 0 },
-    { response: "Response 2", result: 0 },
-    { response: "Response 3", result: 0 },
-    { response: "Response 4", result: 0 },
+    { response: "blue", result: 4 },
+    { response: "red", result: 3 },
+    { response: "yellow", result: 2 },
+    { response: "green", result: 5 },
   ]);
 
   const is_live = true;
@@ -66,7 +66,6 @@ async function getValid() {
   }
 }
 
-// TODO DELETE IF NOT NEEDED
 function doSomething(message) {
   let something = message;
 }
