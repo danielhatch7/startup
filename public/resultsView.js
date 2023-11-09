@@ -5,6 +5,7 @@ class Session {
     sessionIDElement.textContent = sessionID;
 
     loadData(sessionID);
+    loadQuote();
   }
 
   getSessionID() {
@@ -125,3 +126,22 @@ setInterval(() => {
   const sessionID = localStorage.getItem("sessionID");
   loadData(sessionID);
 }, 5000);
+
+async function loadQuote() {
+  const url = "https://api.quotable.io/random";
+  fetch(url)
+    .then((x) => x.json())
+    .then((response) => {
+      document.querySelector("#quote").textContent = JSON.stringify(
+        response.content,
+        null,
+        "  "
+      );
+
+      let author = JSON.stringify(response.author, null);
+      author = author.slice(1, author.length - 1);
+      author = "- " + author;
+
+      document.querySelector("#author").textContent = author;
+    });
+}
