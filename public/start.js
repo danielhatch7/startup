@@ -45,6 +45,9 @@ function start() {
       response4,
     ];
 
+    let responses = [info[3], info[4], info[5], info[6]];
+    localStorage.setItem("responses", responses);
+
     sendInfo(info);
 
     window.location.href = "hostView.html";

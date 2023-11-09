@@ -41,6 +41,12 @@ apiRouter.put("/start", (req, res) => {
   startSession(req.body);
 });
 
+// StartSession TODO: FINISH
+apiRouter.put("/end", (req, res) => {
+  endSession(req.body);
+  res.send(valid);
+});
+
 // SubmitVote TODO: FINISH
 apiRouter.post("/vote/*", (req, res) => {
   session_results = updateVote(req.body);
@@ -89,6 +95,16 @@ function startSession(session_info) {
   ]);
   results.set(sessionID, [0, 0, 0, 0]);
   voters.set(sessionID, []);
+}
+
+function endSession(session_info) {
+  let sessionID = session_info.sessionID;
+  let is_live = session_info.is_live;
+
+  let current = info.get(sessionID);
+  current[current.length - 1] = is_live;
+
+  info.set(sessionID, current);
 }
 
 // TODO: FINISH

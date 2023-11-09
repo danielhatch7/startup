@@ -28,9 +28,11 @@ function finishSetup() {
 
   const live_status = document.querySelector(".live_status");
   let live = this.getLiveStatus();
-  if (live) {
+  if (live != "false") {
     live_status.textContent = "LIVE";
-  } else [(live_status.textContent = "NOT LIVE")];
+  } else {
+    live_status.textContent = "NOT LIVE";
+  }
 }
 
 function getLiveStatus() {
@@ -118,3 +120,8 @@ function loadResults() {
 
 //loadData(sessionID);
 const session = new Session();
+
+setInterval(() => {
+  const sessionID = localStorage.getItem("sessionID");
+  loadData(sessionID);
+}, 5000);

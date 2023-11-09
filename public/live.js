@@ -216,3 +216,8 @@ function loadResults() {
     tableBodyEl.innerHTML = "<tr><td colSpan=4>No Results Yet :(</td></tr>";
   }
 }
+
+setInterval(() => {
+  const sessionID = localStorage.getItem("sessionID");
+  loadData(sessionID);
+}, 5000);

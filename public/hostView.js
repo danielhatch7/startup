@@ -38,23 +38,29 @@ class Session {
   }
 }
 
-function loadData(sessionID) {
-  // this is where the websocket data will be filled in later
-  // const webData = getData(sessionID);
-  // const question = webData.question;
-  // const results = webData.results;
-  // temp placeholders
-  // const question = "What is your favorite color?";
-  // const results = JSON.stringify([
-  //  { response: "blue", result: 4 },
-  //  { response: "red", result: 3 },
-  //  { response: "yellow", result: 2 },
-  //  { response: "red", result: 5 },
-  // ]);
-  // const is_live = true;
-  //localStorage.setItem("question", question);
-  //localStorage.setItem("results", results);
-  //localStorage.setItem("is_live", is_live);
+async function loadData(sessionID) {
+  try {
+    let request = "/api/results/" + sessionID;
+    const response1 = await fetch(request);
+    const results = await response1.json();
+
+    let responses = localStorage.getItem("responses");
+    responses = responses.split(",");
+
+    const current_results = JSON.stringify([
+      { response: responses[0], result: results[0] },
+      { response: responses[1], result: results[1] },
+      { response: responses[2], result: results[2] },
+      { response: responses[3], result: results[3] },
+    ]);
+
+    localStorage.setItem("results", current_results);
+    loadResults();
+  } catch (err) {
+    // TODO FINISH
+    console.log("something happened");
+    console.log(err);
+  }
 }
 
 function loadResults() {
@@ -65,6 +71,7 @@ function loadResults() {
   }
 
   const tableBodyEl = document.querySelector("#results");
+  tableBodyEl.innerHTML = "";
 
   if (results.length) {
     let total_voters = 0;
@@ -105,11 +112,42 @@ function loadResults() {
 //loadData(sessionID);
 const session = new Session();
 
+async function finishSession() {
+  const sessionID = localStorage.getItem("sessionID");
+  const newRequest = {
+    sessionID: sessionID,
+    is_live: false,
+  };
+
+  try {
+    let request = "/api/end";
+    const response = await fetch(request, {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(newRequest),
+    });
+    const output = await response.json();
+
+    finishSession();
+    // TODO FINISH
+  } catch (err) {
+    // TODO FINISH
+    console.log("something happened");
+    doSomething(err);
+    console.log(err);
+  }
+}
+
 function end() {
-  // TODO fill this in
+  finishSession();
   localStorage.setItem("is_live", false);
   window.location.href = "resultsView.html";
 }
+
+setInterval(() => {
+  const sessionID = localStorage.getItem("sessionID");
+  loadData(sessionID);
+}, 5000);
 
 setInterval(() => {
   const statuses = ["joined", "voted"];
