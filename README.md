@@ -102,3 +102,20 @@ For this deliverable I added backend endpoints that receives votes and returns t
 - **Calls to third party endpoints** - I used the random quote generator api to put a random quote on the resultsView.html page
 - **Backend service endpoints** - Endpoints for voting results and voting information like questions and responses. Endpoints to start and end voting session
 - **Frontend calls service endpoints** - I did this using the fetch function. I fetched the voting totals and voting question information. I also used fetch to update a user's vote if they changed their mind.
+
+## DB deliverable
+
+For this deliverable I stored the votes for all voting sessions in the database.
+
+- **MongoDB Atlas database created** - done!
+- **Endpoints for data** - My stubbed out endpoints now process the data and send it to Mongo.
+- **Stores data in MongoDB** - Everything stores/retrieves data in MongoDB as expected.
+
+## Login deliverable
+
+For this deliverable I associate the votes with the logged in user.
+
+- **User registration** - Creates a new account in the database.
+- **existing user** - Stores the votes under the same user if the user already exists.
+- **Use MongoDB to store credentials** - Stores both user and their votes.
+- **Restricts functionality** - You cannot vote until you have logged in.
