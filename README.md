@@ -119,3 +119,12 @@ For this deliverable I associate the votes with the logged in user.
 - **existing user** - Stores the votes under the same user if the user already exists.
 - **Use MongoDB to store credentials** - Stores both user and their votes.
 - **Restricts functionality** - You cannot vote until you have logged in.
+
+## WebSocket deliverable
+
+For this deliverable I used webSocket to update the votes on the hostView page in realtime.
+
+- **Backend listens for WebSocket connection** - done!
+- **Frontend makes WebSocket connection** - done!
+- **Data sent over WebSocket connection** - done!
+- **WebSocket data displayed** - All user votes display in realtime on the hostView.html page.

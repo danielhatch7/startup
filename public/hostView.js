@@ -1,4 +1,11 @@
+// Event messages
+const VoterJoinedEvent = "voterJoined";
+const VoterLeftEvent = "voterLeft";
+const BallotCastEvent = "ballotCast";
+
 class Session {
+  socket;
+
   constructor() {
     const sessionID = document.querySelector(".session-ID");
 
@@ -14,11 +21,7 @@ class Session {
     const host_name = document.querySelector(".voter-name");
     host_name.textContent = this.getHostName();
 
-    const live_status = document.querySelector(".live_status");
-    let live = this.getLiveStatus();
-    if (live) {
-      live_status.textContent = "session LIVE";
-    } else [(live_status.textContent = "NOT LIVE")];
+    this.configureWebSocket(this.getSessionID());
   }
 
   getSessionID() {
@@ -35,6 +38,57 @@ class Session {
 
   getQuestion() {
     return localStorage.getItem("question") ?? "Unknown";
+  }
+
+  // Functionality for peer communication using WebSocket
+
+  configureWebSocket(sessionID) {
+    const protocol = window.location.protocol === "http:" ? "ws" : "wss";
+    this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    this.socket.onopen = (event) => {
+      this.broadcastEvent(
+        "this.getPlayerName()",
+        VoterJoinedEvent,
+        {},
+        sessionID
+      );
+      this.displayMsg("system-event live_status", "Session", "connected");
+    };
+    this.socket.onclose = (event) => {
+      this.displayMsg("system-event live_status", "Session", "disconnected");
+    };
+    this.socket.onmessage = async (event) => {
+      const msg = JSON.parse(await event.data.text());
+      if (msg.type === BallotCastEvent) {
+        this.displayMsg(
+          "voter-event voter-name",
+          msg.from,
+          `voted ${msg.value.vote}`
+        );
+      } else if (msg.type === VoterJoinedEvent) {
+        this.displayMsg("voter-event voter-name", msg.from, `joined`);
+      } else if (msg.type === VoterLeftEvent) {
+        this.displayMsg("voter-event voter-name", msg.from, `left`);
+      }
+    };
+  }
+
+  displayMsg(cls, from, msg) {
+    const chatText = document.querySelector("#voter-messages");
+    chatText.innerHTML =
+      `<div class="event"><span class="${cls}">${from}</span> ${msg}</div>` +
+      chatText.innerHTML;
+  }
+
+  //TODO: Move to live.js
+  broadcastEvent(from, type, value, sessionID) {
+    const event = {
+      from: from,
+      type: type,
+      value: value,
+      sessionID: sessionID,
+    };
+    this.socket.send(JSON.stringify(event));
   }
 }
 
@@ -81,9 +135,6 @@ function loadResults() {
 
       responseTdEl.textContent = line.response;
       resultTdEl.textContent = line.result;
-
-      console.log(responseTdEl);
-      console.log(resultTdEl);
 
       const rowEl = document.createElement("tr");
       rowEl.appendChild(responseTdEl);
@@ -148,117 +199,6 @@ setInterval(() => {
   const sessionID = localStorage.getItem("sessionID");
   loadData(sessionID);
 }, 5000);
-
-setInterval(() => {
-  const statuses = ["joined", "voted"];
-  const names = [
-    "Daniel",
-    "Hannah",
-    "Jacob",
-    "Sarah",
-    "Paul",
-    "Joseph",
-    "Christopher",
-    "Alice",
-    "Bob",
-    "Carol",
-    "Dave",
-    "Eve",
-    "Frank",
-    "George",
-    "Hannah",
-    "Ian",
-    "Jack",
-    "Jill",
-    "John",
-    "Joseph",
-    "Karen",
-    "Kevin",
-    "Lisa",
-    "Luke",
-    "Mary",
-    "Matthew",
-    "Michael",
-    "Michelle",
-    "Nathan",
-    "Olivia",
-    "Peter",
-    "Rachel",
-    "Rebecca",
-    "Richard",
-    "Robert",
-    "Sarah",
-    "Scott",
-    "Stephen",
-    "Susan",
-    "Thomas",
-    "Timothy",
-    "Victoria",
-    "William",
-    "Zachary",
-    "Amelia",
-    "Ava",
-    "Benjamin",
-    "Caleb",
-    "Charlotte",
-    "Connor",
-    "Elijah",
-    "Emma",
-    "Ethan",
-    "Everleigh",
-    "Faith",
-    "Harper",
-    "Henry",
-    "Isabel",
-    "Jack",
-    "Jaiden",
-    "Jasmine",
-    "Jayden",
-    "Jennifer",
-    "John",
-    "Josephine",
-    "Joshua",
-    "Julia",
-    "Julian",
-    "Liam",
-    "Lily",
-    "Logan",
-    "Lucas",
-    "Lucy",
-    "Madeline",
-    "Madison",
-    "Matthew",
-    "Maya",
-    "Michael",
-    "Mia",
-    "Nathan",
-    "Noah",
-    "Olivia",
-    "Owen",
-    "Paige",
-    "Parker",
-    "Patrick",
-    "Peter",
-    " Peyton",
-    "Rachel",
-    "Rebecca",
-    "Riley",
-    "Robert",
-    "Ryan",
-    "Sarah",
-    "Sophia",
-    "Sydney",
-    "Taylor",
-    "Thomas",
-    "William",
-  ];
-  let status = statuses[getRandomInt(statuses.length)];
-  let name = names[getRandomInt(names.length)];
-  const chatText = document.querySelector("#voter-messages");
-  chatText.innerHTML =
-    `<div class="event"><span class="voter-event voter-name">${name} </span>${status}</div>` +
-    chatText.innerHTML;
-}, 10000);
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);

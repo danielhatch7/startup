@@ -1,3 +1,8 @@
+// Event messages
+const VoterJoinedEvent = "voterJoined";
+const VoterLeftEvent = "voterLeft";
+const BallotCastEvent = "ballotCast";
+
 const btnDescriptions = [
   { name: "response_0" },
   { name: "response_1" },
@@ -16,6 +21,7 @@ class Session {
   buttons;
   current_vote;
   sessionID;
+  socket;
 
   constructor() {
     this.buttons = new Map();
@@ -28,6 +34,10 @@ class Session {
 
     loadInfo(this.sessionID);
     loadData(this.sessionID);
+
+    this.configureWebSocket(this.sessionID);
+
+    this.setButtons();
   }
 
   getSessionID() {
@@ -40,6 +50,27 @@ class Session {
     localStorage.setItem("current_vote", this.current_vote);
     submitVote(this.sessionID, vote);
     loadResults();
+
+    let responses = this.getResponses();
+    responses = responses.split(",");
+    const index = vote[vote.length - 1];
+
+    const newVote = { vote: responses[index] };
+
+    this.broadcastEvent(
+      this.getPlayerName(),
+      BallotCastEvent,
+      newVote,
+      this.sessionID
+    );
+  }
+
+  getPlayerName() {
+    return localStorage.getItem("userName") ?? "Mystery player";
+  }
+
+  getResponses() {
+    return localStorage.getItem("responses") ?? "Mystery player";
   }
 
   setButtons() {
@@ -48,6 +79,39 @@ class Session {
         this.buttons.set(el.id, new Button(btnDescriptions[i], el));
       }
     });
+  }
+
+  configureWebSocket(sessionID) {
+    const protocol = window.location.protocol === "http:" ? "ws" : "wss";
+    this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    this.socket.onopen = (event) => {
+      this.broadcastEvent(
+        this.getPlayerName(),
+        VoterJoinedEvent,
+        {},
+        sessionID
+      );
+      this.broadcastEvent(
+        this.getPlayerName(),
+        VoterJoinedEvent,
+        {},
+        sessionID
+      );
+    };
+    this.socket.onclose = (event) => {
+      this.broadcastEvent(this.getPlayerName(), VoterLeftEvent, {});
+    };
+  }
+
+  //TODO: Move to live.js
+  broadcastEvent(from, type, value, sessionID) {
+    const event = {
+      from: from,
+      type: type,
+      value: value,
+      sessionID: sessionID,
+    };
+    this.socket.send(JSON.stringify(event));
   }
 }
 
@@ -60,7 +124,6 @@ function finishSetup() {
   question.textContent = this.getQuestion();
 
   loadResults();
-  setButtons();
 }
 
 const session = new Session();
@@ -183,9 +246,6 @@ function loadResults() {
       //   temp_result += 1;
       // }
       resultTdEl.textContent = temp_result;
-
-      console.log(responseTdEl);
-      console.log(resultTdEl);
 
       const rowEl = document.createElement("tr");
       rowEl.appendChild(responseTdEl);
