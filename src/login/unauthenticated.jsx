@@ -22,7 +22,7 @@ export function Unauthenticated(props) {
       const msg = "Fields cannot be blank";
       setDisplayError(`⚠ Error: ${msg}`);
     } else {
-      loginOrCreate(`/api/auth/login`);
+      loginOrCreate(`/api/auth/create`);
     }
   }
 
