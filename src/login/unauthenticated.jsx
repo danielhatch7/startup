@@ -9,11 +9,21 @@ export function Unauthenticated(props) {
   const [displayError, setDisplayError] = React.useState(null);
 
   async function loginUser() {
-    loginOrCreate(`/api/auth/login`);
+    if (userName === "" || password === "") {
+      const msg = "Fields cannot be blank";
+      setDisplayError(`⚠ Error: ${msg}`);
+    } else {
+      loginOrCreate(`/api/auth/login`);
+    }
   }
 
   async function createUser() {
-    loginOrCreate(`/api/auth/create`);
+    if (userName === "" || password === "") {
+      const msg = "Fields cannot be blank";
+      setDisplayError(`⚠ Error: ${msg}`);
+    } else {
+      loginOrCreate(`/api/auth/login`);
+    }
   }
 
   async function loginOrCreate(endpoint) {
