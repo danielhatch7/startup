@@ -1,5 +1,4 @@
-body {
-  margin-top: 100px;
+.app {
   display: flex;
   flex-direction: column;
   min-width: 375px;

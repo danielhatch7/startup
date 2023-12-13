@@ -124,7 +124,9 @@ apiRouter.post("/valid/*", async (req, res) => {
   let body = req.body;
 
   if (valid.length == 0) {
-    body.message = "Invalid SessionID. Please try again.";
+    body.message =
+      "Invalid Session ID. Please check your session ID with your host and try again.";
+    body.valid = false;
   } else {
     body.message = "";
     body.valid = true;
@@ -138,11 +140,13 @@ apiRouter.post("/valid/*", async (req, res) => {
 // StartSession TODO: FINISH
 apiRouter.put("/start", async (req, res) => {
   await DB.startSession(req.body);
+  res.send();
 });
 
 // StartSession TODO: FINISH
 apiRouter.put("/end", async (req, res) => {
   await DB.endSession(req.body);
+  res.send();
 });
 
 // SubmitVote TODO: FINISH

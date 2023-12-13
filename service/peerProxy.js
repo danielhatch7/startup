@@ -25,7 +25,10 @@ function peerProxy(httpServer) {
       connections.forEach((c) => {
         if (c.id === connection.id) {
           c.sessionID = info.sessionID;
+          connection.sessionID = info.sessionID;
         }
+      });
+      connections.forEach((c) => {
         if (c.id !== connection.id) {
           if (c.sessionID === connection.sessionID) {
             c.ws.send(data);

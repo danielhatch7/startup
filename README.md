@@ -128,3 +128,12 @@ For this deliverable I used webSocket to update the votes on the hostView page i
 - **Frontend makes WebSocket connection** - done!
 - **Data sent over WebSocket connection** - done!
 - **WebSocket data displayed** - All user votes display in realtime on the hostView.html page.
+
+## React deliverable
+
+For this deliverable I converted the application over to use Vue. I know it is supposed to use React, but the instructor said I could use Vue because I already have extensive experience with React.
+
+- **Bundled and transpiled** - done!
+- **Components** - There are many components used to represent various parts of the app. The components include login, home, join, live, start, hostView, results, and resultsView.
+- **Router** - Routing between all of the components listed above.
+- **Hooks** - There are various hooks throughout the app which make use of `useState` and `useEffect` to track changes in vote state and results.
