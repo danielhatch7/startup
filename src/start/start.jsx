@@ -89,8 +89,9 @@ export function Start(props) {
   return (
     <main className="container-fluid bg-light text-center text-dark">
       <div>
-        <h1>Join Live Voting Session</h1>
-        <p>Enter the session ID to join the live session</p>
+        <h1>Start Session</h1>
+
+        <p>Enter the information below to start a live voting session.</p>
         <div>
           <div className="input-group mb-3">
             <span className="input-group-text">Question:</span>
