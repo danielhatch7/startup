@@ -23,7 +23,15 @@ export function Voters(props) {
 
   function createMessageArray() {
     const messageArray = [];
+    let counter = 0;
+    let list = [];
     for (const [i, event] of events.entries()) {
+      list.push(event);
+    }
+
+    list.reverse();
+
+    for (const [i, event] of list.entries()) {
       let message = "unknown";
       if (event.type === VoteEvent.BallotCast) {
         message = `voted ${event.value.vote}`;
@@ -35,12 +43,16 @@ export function Voters(props) {
         message = event.value.msg;
       }
 
-      messageArray.push(
-        <div key={i} className="event">
-          <span className={"voter-event"}>{event.from.split("@")[0]} </span>
-          {message}
-        </div>
-      );
+      if (counter < 10) {
+        messageArray.push(
+          <div key={i} className="event">
+            <span className={"voter-event"}>{event.from.split("@")[0]} </span>
+            {message}
+          </div>
+        );
+      }
+
+      counter += 1;
     }
     return messageArray;
   }
